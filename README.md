@@ -1,3 +1,3 @@
 # Maya-2017
 
-Munki Maya 2017 install and activation
+AutoDesk Maya 2017 Munki Installer
