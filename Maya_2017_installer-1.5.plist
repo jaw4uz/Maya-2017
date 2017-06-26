@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>_metadata</key>
+	<dict>
+		<key>created_by</key>
+		<string>ascs</string>
+		<key>creation_date</key>
+		<date>2017-05-24T12:12:03Z</date>
+		<key>munki_version</key>
+		<string>2.8.2.2855</string>
+		<key>os_version</key>
+		<string>10.12.5</string>
+	</dict>
+	<key>autoremove</key>
+	<false/>
+	<key>catalogs</key>
+	<array>
+		<string>testing</string>
+		<string>production</string>
+	</array>
+	<key>category</key>
+	<string>Graphics</string>
+	<key>description</key>
+	<string>Maya 2017 3D animation, modeling, simulation, and rendering software helps artists work faster with enhancements to existing workflows and new tools.</string>
+	<key>developer</key>
+	<string>AutoDesk</string>
+	<key>display_name</key>
+	<string>AutoDesk Maya 2017</string>
+	<key>icon_hash</key>
+	<string>458e3ddceee789c1cd3d9546d1761c50cfae3f09a6cd051da1926aa6e39d954b</string>
+	<key>installer_item_hash</key>
+	<string>346ad3545a6f6a51cba02b3039c3e3fd2042415f334a3c88bf1fda8c375eefd2</string>
+	<key>installer_item_location</key>
+	<string>Graphics/Maya_2017/Autodesk_Maya_2017_EN_JP_ZH_Mac_OSX-1.5.dmg</string>
+	<key>installer_item_size</key>
+	<integer>1092491</integer>
+	<key>installer_type</key>
+	<string>copy_from_dmg</string>
+	<key>installs</key>
+	<array>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.autodesk.Maya.2017</string>
+			<key>CFBundleShortVersionString</key>
+			<string>2017</string>
+			<key>CFBundleVersion</key>
+			<string>2017</string>
+			<key>path</key>
+			<string>/Applications/Autodesk/maya2017/Maya.app</string>
+			<key>type</key>
+			<string>application</string>
+			<key>version_comparison_key</key>
+			<string>CFBundleShortVersionString</string>
+		</dict>
+	</array>
+	<key>items_to_copy</key>
+	<array>
+		<dict>
+			<key>destination_path</key>
+			<string>/tmp</string>
+			<key>source_item</key>
+			<string>Install Maya 2017.app</string>
+		</dict>
+	</array>
+	<key>minimum_os_version</key>
+	<string>10.4.0</string>
+	<key>name</key>
+	<string>Maya_2017_installer</string>
+	<key>postinstall_script</key>
+	<string>#!/bin/sh
+# See http://knowledge.autodesk.com/support/maya/troubleshooting/caas/CloudHelp/cloudhelp/2016/ENU/Installation-Maya/files/GUID-10885D2B-D900-4DD6-BB14-B82920C2D294-htm.html
+/tmp/Install\ Maya\ 2017.app/Contents/MacOS/setup --noui --force --serial_number=*YourSerialNumber* --product_key=657I1 --license_type=kStandalone
+
+
+# licensing Maya 2017
+# after running your installer do the following:
+
+/tmp/Install\ Maya\ 2017.app/Contents/Resources/adlmreg -i S 657I1 657I1 2017.0.0.F *YourSerialNumber* /Library/Application\ Support/Autodesk/Adlm/PIT/2017/MayaConfig.pit
+
+ # *note that your using the adlm tool contained in the installer application NOT a version of the tool you may have installed elsewhere.
+
+/bin/mkdir /Library/Application\ Support/Autodesk/CLM/LGS/657I1_2017.0.0.F/
+/usr/bin/touch /Library/Application\ Support/Autodesk/CLM/LGS/657I1_2017.0.0.F/LGS.data
+/bin/chmod 777 /Library/Application\ Support/Autodesk/CLM/LGS/657I1_2017.0.0.F/LGS.data
+/bin/echo "_STANDALONE"&gt;&gt;/Library/Application\ Support/Autodesk/CLM/LGS/657I1_2017.0.0.F/LGS.data
+
+# Remove the Maya instller app
+/bin/rm -rf /tmp/Install\ Maya\ 2017.app</string>
+	<key>unattended_install</key>
+	<false/>
+	<key>unattended_uninstall</key>
+	<false/>
+	<key>uninstall_method</key>
+	<string>uninstall_script</string>
+	<key>uninstall_script</key>
+	<string>#!/bin/sh
+
+/bin/rm -rf /Applications/Autodesk/maya2017
+/bin/rm -rf "/Library/Application Support/Autodesk/CLM/LGS/871J1_2018.0.0.F"
+
+/bin/rm -R /Library/Preferences/com.autodesk.Maya.installer.2017.plist
+
+/usr/sbin/pkgutil --forget com.autodesk.pkg.Maya_AdLMconf2017.0
+/usr/sbin/pkgutil --forget com.autodesk.pkg.Maya_core2017</string>
+	<key>uninstallable</key>
+	<true/>
+	<key>version</key>
+	<string>1.5</string>
+</dict>
+</plist>
